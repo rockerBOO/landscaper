@@ -1,0 +1,36 @@
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# Import
+
+Plant
+	Properties
+
+>save to import database
+
+#-=-=-=-=-=-=-=-=-=-=
+# Processor
+
+ImportedPlant 
+	ImportedProperties
+
+
+
+translated = map(translate, ImportedProperties)
+
+
+> save to translated database
+
+
+#-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# Assemble
+
+
+def getDataset(dataset):
+	for line in dataset:
+		yield line
+
+dataset = map(getDataset, "PrairieMoon")
+
+Plant = Plant()
+
+for property in translated:
+	Plant.addProperty(property)
