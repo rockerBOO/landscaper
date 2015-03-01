@@ -1,9 +1,10 @@
 from collections import UserList
 
-class TextProperty:
+class BaseProperty(object):
     def __init__(self, value):
         self.input(value)
 
+class TextProperty(BaseProperty):
     def input(self, value):
         self.data = value
 
@@ -19,7 +20,7 @@ class TextProperty:
     def Type():
         return "Text"
 
-class ListProperty(UserList):
+class ListProperty(BaseProperty, UserList):
 
     def input(self, values):
         if isinstance(values, list):
@@ -41,7 +42,7 @@ class ListProperty(UserList):
     def Type():
         return "List"
 
-class IntProperty:
+class IntProperty(BaseProperty):
     def input(self, values):
         result = []
 
