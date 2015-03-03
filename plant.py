@@ -42,3 +42,11 @@ def GetPlant(key):
 		Plant.addProperty(attribute, property.data)
 
 	return Plant
+
+def GetPlantList(key):
+	list = data.Get(Key+"-list")
+
+	for item in list:
+		plant = data.Get(item)
+
+		yield plant
