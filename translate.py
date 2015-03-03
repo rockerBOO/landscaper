@@ -23,7 +23,7 @@ def Translate(InputPlant):
 		attribute = propertyList[0])
 		property = propertyList[1]
 
-		plant.addProperty(attribute, property)
+		plant.AddProperty(attribute, property)
 
 
 	return plant

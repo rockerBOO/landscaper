@@ -11,7 +11,7 @@ class Plant:
 		if "Name" in self.Properties.keys():
 			return self.Properties["Name"].Value()
 
-	def addProperty(self, attribute, property):
+	def AddProperty(self, attribute, property):
 		self.Properties[attribute] = property
 
 
@@ -39,6 +39,6 @@ def GetPlant(key):
 	Plant = Plant()
 
 	for attribute, property in data["Properties"].items():
-		Plant.addProperty(attribute, property.data)
+		Plant.AddProperty(attribute, property.data)
 
 	return Plant

@@ -7,7 +7,7 @@ def Assemble(plants):
 
 	for plant in plants:
 		for attribute, property in plant.Properties.items():
-			resultPlant.addProperty(attribute, property)
+			resultPlant.AddProperty(attribute, property)
 
 
 	return resultPlant

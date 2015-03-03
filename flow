@@ -1,0 +1,15 @@
+
+Plant.Properties["Height"]["Range"] = [2, 3]
+
+Plant.Properties["Height"]["t"] => "Range"
+Plant.Properties["Height"]["v"] => [2, 3]
+
+Plant.Properties["Height"][0] => "Range"
+Plant.Properties["Height"][1] => [2, 3]
+
+
+Plant.Properties["Spacing"]["Range"] => [2, 3]
+
+Plant.Properties["Root Moisture"]["Range"] => [20, 80]
+
+Plant.Properties["Light"]["Range"] => [3, 10]
