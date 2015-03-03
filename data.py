@@ -26,6 +26,7 @@ def Set(key, value):
 		return redisSet(key, value)
 
 
+
 def SetKey(key):
 	global _dataKey
 

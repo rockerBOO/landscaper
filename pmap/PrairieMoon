@@ -1,0 +1,50 @@
+{
+    "Plant Spacing": {
+        "match": {
+            "(?P<min>\\d+)-(?P<max>\\d+)": ["Spacing", "Spacing"]
+        }
+    },
+    "Sun Exposure": {
+        "replace": {
+            "Full Sun": {"Light": 10},
+            "Part Shade": {"Light": 5},
+            "Shade": {"Light": 3}
+        }
+    },
+    "Soil Moisture": {
+        "replace": {
+            "Wet-Mesic": {"RootMoisture": 10},
+            "Mesic (Medium)": {"RootMoisture": 5},
+            "Dry-Mesic": {"RootMoisture": 3},
+            "Dry": {"Root Moisture": 1}
+        }
+    },
+    "Height": {
+        "match": {
+            "(?P<max>\\d+)\\s+(?P<scale>.*)": ["Height"]
+        }
+    },
+    "Bloom Color": {
+        "replace": {
+            "Pink": {"BloomColor": "Pink"},
+            "Orange": {"BloomColor": "Orange"},
+            "White": {"BloomColor": "White"}
+        }
+    },
+    "Bloom Time": {
+        "replace": {
+            "Jan": {"BloomTime": 1},
+            "Feb": {"BloomTime": 2},
+            "Mar": {"BloomTime": 3},
+            "Apr": {"BloomTime": 4},
+            "May": {"BloomTime": 5},
+            "June": {"BloomTime": 6},
+            "July": {"BloomTime": 7},
+            "Aug": {"BloomTime": 8},
+            "Sept": {"BloomTime": 9},
+            "Oct": {"BloomTime": 10},
+            "Nov": {"BloomTime": 11},
+            "Dec": {"BloomTime": 12}
+        }
+    }
+}

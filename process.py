@@ -1,11 +1,29 @@
 
 import translate
+import json 
+import config
 
-config.set("datastore", "redis")
+config.Set("datastore", "redis")
 
-data.SetKey("PrairieMoonImport")
+for attribute, mapping in json.load(open("pmap/PrairieMoon")).items():
+	print(attribute)
+	print(mapping)
 
+<<<<<<< HEAD
 def translatePlant(data):
 	pass
 
 dataset = map(translatePlant, plants)
+=======
+translate.SetPmap("pmap", )
+
+config.set("pmap", "PrairieMoon")
+
+data.SetDefaultKey("PrairieMoonImport")
+
+
+for inputPlant in plants:
+	Plant = translate.Translate(inputPlant)
+
+	plant.SavePlant(Plant)
+>>>>>>> master
