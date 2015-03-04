@@ -2,11 +2,11 @@ from collections import UserList
 
 class BaseProperty(object):
     def __init__(self, value):
-        self.input(value)
+        self.Input(value)
 
 class TextProperty(BaseProperty):
-    def input(self, value):
-        self.data = value
+    def Input(self, values):
+        self.data = values
 
     def __str__(self):
         return "<%s text:%s>" % (self.__class__.__name__, self.data)
@@ -22,7 +22,7 @@ class TextProperty(BaseProperty):
 
 class ListProperty(BaseProperty, UserList):
 
-    def input(self, values):
+    def Input(self, values):
         if isinstance(values, list):
             for value in values:
                 self.addToList(value)
@@ -39,11 +39,14 @@ class ListProperty(BaseProperty, UserList):
     def __str__(self):
         return "<%s list:%s>" % (self.__class__.__name__, self.data)
 
+    def ToJSON(self):
+        return json.f
+
     def Type():
         return "List"
 
 class IntProperty(BaseProperty):
-    def input(self, values):
+    def Input(self, values):
         result = []
 
         if isinstance(values, list):
@@ -75,7 +78,7 @@ class RangeProperty(IntProperty):
     def __str__(self):
         return "<%s min:%d max:%d>" % (self.__class__.__name__, self.min, self.max)
 
-    def input(self, values):
+    def Input(self, values):
         for value in super(RangeProperty, self).input(values):
             if isinstance(value, int):
                 self.addToRange(value)
