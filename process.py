@@ -1,22 +1,27 @@
 
-import translate
+import properties.translate as translate
 import json 
 import config
+import orm.data
+import plant
 
-config.Set("datastore", "redis")
+dir = os.path.dirname(__file__)
+filename = os.path.join(dir, '.')
 
-for attribute, mapping in json.load(open("pmap/PrairieMoon")).items():
-	print(attribute)
-	print(mapping)
+#config.Set("datastore", "redis")
 
-translate.SetPmap("pmap", )
 
-config.set("pmap", "PrairieMoon")
+config.Set("pmap", "PrairieMoon")
 
-data.SetDefaultKey("PrairieMoonImport")
+def PropertyMap():
+	return json.load(open("pmap/PrairieMoon"))
+	
+InputPlant = plant.Plant()
 
-for inputPlant in plants:
-	Plant = translate.Translate(inputPlant)
+Plant = translate.Translate(InputPlant, PropertyMap())
+plant.SavePlant(Plant)
 
-	plant.SavePlant(Plant)
+#translate.SetPmap("pmap", )
 
+
+#orm.data.SetDefaultKey("PrairieMoonImport")

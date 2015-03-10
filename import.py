@@ -1,39 +1,46 @@
 
 import config
-import data
-import dataset
+import orm.data
+import orm.dataset
 from collections import OrderedDict
 import plant
-import properties
+
+import processors.usda as usda
+
+import os
+dir = os.path.dirname(__file__)
+filename = os.path.join(dir, '.')
 
 config.Set("datastore", "redis")
-data.SetKey("PrairieMoonImport")
+orm.data.SetKey("PrairieMoonImport")
 
 
 def PlantList():
 	keys = OrderedDict()
 
-	for line in dataset.CSVFileDataset(open("data/plantlist", encoding='utf-8')):
+	for line in orm.dataset.CSVFileDataset(open("data/plantlist", encoding='utf-8')):
 		# CSV apply first line to the keys
 		if len(keys) == 0:
 			keys = line
 			continue
 
-		yield line
+		yield keys, line
 
-for plantList in PlantList():
+
+for keys, plantList in PlantList():
 	print(plantList)
+	print(keys)
 
-	commonName = properties.TextProperty(plantList[3])
-	scientificNamePlusAuthor = properties.TextProperty(plantList[2])
-	family = properties.TextProperty(plantList[4])
+	result = {}
 
-	Plant = plant.Plant()
+	for index, key in enumerate(keys):
+		result[key] = plantList[index]
 
-	Plant.addProperty("Name", commonName)
-	Plant.addProperty("ScientificName", scientificNamePlusAuthor)
-	Plant.addProperty("Family", family)
 
-	plant.AddPlant(Plant)
+	Plant = usda.USDA.ImportProperties(result)
 
 	print(Plant.Properties)
+
+	#plant.AddPlant(Plant)
+
+	#print(Plant.Properties)
