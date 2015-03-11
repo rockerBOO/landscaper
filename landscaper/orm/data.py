@@ -1,6 +1,6 @@
 
 import redis
-import config
+from . import config
 
 r = redis.StrictRedis(host='localhost', port=6379, db=0)
 

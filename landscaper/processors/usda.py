@@ -1,6 +1,6 @@
 
-import properties.properties as prop
-import plant
+from ..properties import properties as prop
+from ..plant import plant as plant
 
 class USDA:
 

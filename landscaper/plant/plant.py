@@ -1,5 +1,5 @@
 
-import data
+from ..orm import data as data
 
 class Plant:
 	Properties = {}
@@ -10,6 +10,8 @@ class Plant:
 	def Name(self):
 		if "Name" in self.Properties.keys():
 			return self.Properties["Name"].Value()
+
+		return ""
 
 	def SetProperty(self, attribute, property):
 		self.Properties[attribute] = property
@@ -23,13 +25,13 @@ def AddPlant(Plant):
 
 	return SavePlant(key, Plant)
 
-def SavePlant(key, Plant):
+def SavePlant(Plant):
 	properties = {}
 
 	for attribute, property in Plant.Properties.items():
 		properties[attribute] = property.ToJSON()
 
-	setResult = data.Set(data.Key() + key, {"Properties": properties})
+	setResult = data.Set(data.Key() + Plant.Name(), {"Properties": properties})
 
 	if setResult == False:
 		# throw error

@@ -1,6 +1,8 @@
 Landscaper
 ===
 
+Currently in the planning and experimenting phase.
+
 Goal of this project is to give tools for landscapers, home owners, gardeners and anyone interested in ecology.
 
 Initial tools:

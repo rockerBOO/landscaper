@@ -1,5 +1,5 @@
 
-from landscaper.plant import plant
+from ..plant import plant
 
 #ImportedPlant 
 #	ImportedProperties
@@ -94,15 +94,15 @@ def Translate(InputPlant, propertyMap):
 	translated = [TranslateProperty(attribute, property, propertyMap) 
 		for attribute, property in InputPlant.Properties.items()]
 
-	plant = Plant()
+	Plant = plant.Plant()
 
 	for propertyList in translated:
 		attribute = propertyList[0]
 		property = propertyList[1]
 
-		plant.SetProperty(attribute, property)
+		Plant.SetProperty(attribute, property)
 
 
-	return plant
+	return Plant
 
 

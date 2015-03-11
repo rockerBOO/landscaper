@@ -1,15 +1,17 @@
 
-import properties.translate as translate
+import landscaper.properties.translate as translate
 import json 
-import config
-import orm.data
-import plant
+import landscaper.orm.config as config
+
+import landscaper.orm.data as data
+import landscaper.plant.plant as plant
+import os
 
 dir = os.path.dirname(__file__)
 filename = os.path.join(dir, '.')
 
-#config.Set("datastore", "redis")
-
+config.Set("datastore", "redis")
+data.SetKey("PrairieMoonImport")
 
 config.Set("pmap", "PrairieMoon")
 
