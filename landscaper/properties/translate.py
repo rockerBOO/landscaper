@@ -1,6 +1,6 @@
 
-from ..plant import plant
-
+from landscaper.plant import plant
+import re
 #ImportedPlant 
 #	ImportedProperties
 
@@ -25,83 +25,131 @@ def SetPmap(key, value):
 	_pmap = value
 	config.Set("pmap", key)
 
-
-def TranslateProperty(attribute, property, propertyMap):
-	print("pmap attribute", attribute)
-
-	if attribute in propertyMap.keys():
-	    mappings = propertyMap[attribute]
-
-	    for key in mappings.keys():
-	        print("mapping", attribute, property, mappings)
-	        if key == 'replace':
-	            mapped.append(replace(property, mappings[key]))
-	        elif key == 'match':
-	            mapped.append(match(property, mappings[key]))
-	        else:
-	            print("key", key)
-
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 
 #input "2-3ft'"
 #mappings "match": ["(?P<min>\\d+)-(?P<max>\\d+)"],
 def match(properties, mappings):
-    result = []
+	results = []
 
-    for regex, mapping in mappings.items():
-        print("regex", regex)
+	for regex, mapping in mappings.items():
+		for property in properties:
+			print("match_property", property, regex, mapping)
 
-        try:
-            mapMatches = re.findall(regex, input)
-        except TypeError:
-            print(TypeError)
-            continue
+			result = match_property(property, regex, mapping)
+			results.append(result)
 
-        for group in mapMatches:
-            matches = []
+	return results
 
-            print("mapMatches", mapMatches)
+def match_property(property, regex, map):
+	print("match_property", property, regex, map)
 
-            for mm in mapMatches:
-                for m in mm:
-                    print("m", m)
-                    matches.append(m)
+	try:
+		match = re.findall(regex, property)
+	except TypeError:
+		print(TypeError)
+		return
 
-            for x, y in [(x,y) for x in mapping for y in matches]:
-                print("x:y", x, y)
-                result.append({x: y})
+	if match:
+		print('da match', match)
+		for group in match:
+			matches = []
+
+			print("match", match)
+
+			for mm in match:
+				for m in mm:
+					print("m", m)
+					matches.append(m)
+
+			for x, y in [(x,y) for x in map for y in matches]:
+				print("x:y", x, y)
+				return {x: y}
+
+	else:
+		print("No matches found for this property. ", property)
+
+def replace_property(attribute, property, map):
+	if isinstance(input, list):
+		for value in input:
+			if isinstance(v, dict):
+				if value == k:
+					return v
 
 
-    return result
 
 #input ["Part Shade"]
 #mappings {"Full Sun": {"Light": 10}, "Part Shade": {"Light":10}}
 def replace(properties, mappings):
-    result = []
+	result = []
 
-    print("replace", input)
+	print("replace", properties, mappings)
 
-    for k, v in mappings.items():
-        if isinstance(input, list):
-            for value in input:
-                if isinstance(v, dict):
-                    if value == k:
-                        result.append(v)
+	for property in properties:
+		print(property)
 
-    return result
 
+	return result
+
+def TranslateProperty(attribute, properties, propertyMap):
+	print("pmap attribute", attribute)
+	print("propertyMap", propertyMap)
+
+	results = []
+
+	if attribute in propertyMap.keys():
+		mappings = propertyMap[attribute]
+
+		for key in mappings.keys():
+			print("mapping", attribute, properties, mappings)
+
+
+			if key == 'replace':
+
+				return replace(properties, mappings[key])
+
+			elif key == 'match':
+
+				return match(properties, mappings[key])
+
+			else:
+				print("key", key)
+
+	return results
+
+# properties > translate > properties
 
 def Translate(InputPlant, propertyMap):
 	translated = [TranslateProperty(attribute, property, propertyMap) 
 		for attribute, property in InputPlant.Properties.items()]
 
+	print("translated", translated)
+
 	Plant = plant.Plant()
 
-	for propertyList in translated:
-		attribute = propertyList[0]
-		property = propertyList[1]
+	if len(translated) == 0:
+		print("No results translated.")
+		return Plant
 
-		Plant.SetProperty(attribute, property)
+	print(translated)
 
+	for properties in translated:
+		print(properties)
+
+		if len(properties) == 0:
+			continue
+
+		for p in properties:
+			for attribute, property in p.items():
+
+				Plant.SetProperty(attribute, property)
+
+	print(Plant.Properties)
 
 	return Plant
 

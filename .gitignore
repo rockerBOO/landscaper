@@ -42,6 +42,10 @@ htmlcov/
 nosetests.xml
 coverage.xml
 
+# Sublime
+*.sublime-project
+*.sublime-workspace
+
 # Translations
 *.mo
 *.pot
@@ -54,3 +58,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Zed
+.zedstate
