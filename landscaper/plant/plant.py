@@ -1,5 +1,6 @@
 
 from ..orm import data as data
+from landscaper.properties import properties
 
 class Plant:
 	Properties = {}
@@ -14,6 +15,9 @@ class Plant:
 		return ""
 
 	def SetProperty(self, attribute, property):
+		if isinstance(property, str):
+			property = properties.TextProperty(property)
+
 		self.Properties[attribute] = property
 
 	def SetProperties(self, properties):

@@ -102,9 +102,11 @@ def TranslateProperty(attribute, properties, propertyMap):
 
 	results = []
 
+	# Find attribute in property map
 	if attribute in propertyMap.keys():
 		mappings = propertyMap[attribute]
 
+		# Loop through property map's mappings for the attribute
 		for key in mappings.keys():
 			print("mapping", attribute, properties, mappings)
 
@@ -130,7 +132,7 @@ def Translate(InputPlant, propertyMap):
 
 	print("translated", translated)
 
-	Plant = plant.Plant()
+
 
 	if len(translated) == 0:
 		print("No results translated.")
@@ -138,6 +140,9 @@ def Translate(InputPlant, propertyMap):
 
 	print(translated)
 
+	Plant = plant.Plant()
+
+	# Loop through translated properties to apply to a Plant
 	for properties in translated:
 		print(properties)
 

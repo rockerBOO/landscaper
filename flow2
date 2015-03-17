@@ -1,0 +1,51 @@
+List
+
+key/value
+
+
+
+landscaper-usda-list
+
+landscaper-processed-usda-list
+
+landscaper
+
+
+
+Injest
+- Use or generate list to process
+
+plantList = List.FromCSV('./data/plantlist')
+
+for info in plantList:
+	# import plant
+
+	data.save(plant)
+
+Process
+
+plantList = cur.select("select * from plant_list where job_id = 1")
+
+for info in plantList:
+	
+	plant = Plant(info)
+
+	plant.Properties = translate(properties, propertyMap)
+
+	data.save(plant)
+
+Organize
+
+for variable in variables:
+	
+	#matching variable
+	variable.Height = 5
+
+	#range variable
+	variable.Height = (5, 6)
+
+	variable.Height/variable.BloomTime/variable.BloomLength
+	#function variable
+	variable_function = lamba function (variable): x*2
+
+Present/Assemble
