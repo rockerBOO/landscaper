@@ -22,4 +22,3 @@ def FileDataset(file):
 		# convert data
 		yield line
 
-

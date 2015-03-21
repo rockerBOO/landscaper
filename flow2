@@ -20,19 +20,32 @@ plantList = List.FromCSV('./data/plantlist')
 for info in plantList:
 	# import plant
 
-	data.save(plant)
+	key = data.save(Plant)
+
+	if key == False:
+		print('Failed to save plant')
+		continue
+
+	# add plant to list
+
+	processor.add(key)
 
 Process
 
-plantList = cur.select("select * from plant_list where job_id = 1")
+# Lock row
+plantList = cur.select("select * from list where job_id = 1")
 
-for info in plantList:
+work = processor.getWork()
 	
-	plant = Plant(info)
+plant = Plant(info)
 
-	plant.Properties = translate(properties, propertyMap)
+data.get(info['key'])
 
-	data.save(plant)
+plant.Properties = translate(properties, propertyMap)
+
+data.save('processed-plant-key', plant)
+
+processor.finish()
 
 Organize
 
@@ -45,7 +58,8 @@ for variable in variables:
 	variable.Height = (5, 6)
 
 	variable.Height/variable.BloomTime/variable.BloomLength
+
 	#function variable
-	variable_function = lamba function (variable): x*2
+	variable_function = lamba function (variable): variable*2
 
 Present/Assemble
