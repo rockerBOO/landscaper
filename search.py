@@ -3,6 +3,22 @@ from elasticsearch import Elasticsearch
 
 es = Elasticsearch()
 
-es.index(index="my-index", doc_type="test-type", id=42, body={"any": "data", "timestamp": datetime.now()})
+results = es.search(index="landscaper", body={"query": {"match": {'Habit': 'Tree'}}})
 
-es.get(index="my-index", doc_type="test-type", id=42)['_source']
+print(results['hits']['hits'])
+
+plants = []
+
+for hit in results['hits']['hits']:
+
+	plants.append({
+		'cnames': hit['_source']['Common Name'],
+		'habits': hit['_source']['Habit'],
+		'sun': hit['_source']['Sun'],
+		'snames': hit['_source']['Scientific Name'],
+	})
+	
+	print()
+	print('__')
+
+print(plants)
