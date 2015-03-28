@@ -1,0 +1,55 @@
+extends layout
+
+block content
+	script(type="text/javascript" src="/javascripts/main.js")
+
+
+
+	form
+		// input(type="text", name="name", placeholder="Common Name")
+		// input(type="text", name="sname", placeholder="Latin Name")
+
+		#sun(class="input_block")
+			input(type="checkbox" name="sun[]" id="sun_sun" value="Sun" checked=_.contains(input.sun, "Sun"))
+			label(for="sun_sun") Sun
+			input(type="checkbox" name="sun[]" id="sun_part_shade" value="Part-Shade" checked=_.contains(input.sun, "Part-Shade"))
+			label(for="sun_part_shade") Part Shade
+			input(type="checkbox" name="sun[]" id="sun_shade" value="Shade" checked=_.contains(input.sun, "Shade"))
+			label(for="sun_shade") Shade
+
+		
+		#water(class="input_block")
+			input(type="checkbox" name="water[]" id="water_dry" value="Dry" checked=_.contains(input.water, "Dry"))
+			label(for="water_dry") Dry
+			input(type="checkbox" name="water[]" id="water_moist" value="Moist" checked=_.contains(input.water, "Moist"))
+			label(for="water_moist") Moist
+			input(type="checkbox" name="water[]" id="water_wet" value="Wet" checked=_.contains(input.water, "Wet"))
+			label(for="water_wet") Wet
+
+
+		#habit(class="input_block")
+			input(type="checkbox" name="habit[]" id="habit_tree" value="Tree" checked=_.contains(input.habit, "Tree"))
+			label(for="habit_tree") Tree
+			input(type="checkbox" name="habit[]" id="habit_shrub" value="Shrub" checked=_.contains(input.habit, "Shrub"))
+			label(for="habit_shrub") Shrub
+			input(type="checkbox" name="habit[]" id="habit_herb" value="Herb" checked=_.contains(input.habit, "Herb"))
+			label(for="habit_herb") Herb
+
+
+		input(type="submit", value="List me!")
+
+	div(style="clear:both;")
+
+	div(style="border-bottom: 1px solid #CCC;") #{meta.total} Results | #{meta.max_score} Max Score
+
+	each plant in plants
+		.plant
+			h3 #{plant['names'][0]}
+			em #{plant['snames']}
+			br
+			// span #{plant['habit']}
+			// span #{plant['sun']}
+			// span #{plant['water']}
+			// span #{plant['score']}
+			// span #{plant['index']}
+			// span #{plant['type']}

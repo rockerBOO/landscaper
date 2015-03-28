@@ -6,7 +6,7 @@ import tornado.template
 
 class MainHandler(tornado.web.RequestHandler):
 	def get(self):
-		loader = tornado.template.Loader("../templates/")
+		loader = tornado.template.Loader("templates/")
 		return loader.load("home.html").generate(title="x")
 
 application = tornado.web.Application([
